@@ -1,26 +1,48 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import PropTypes from 'prop-types';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
+import MenuIcon from 'material-ui-icons/Menu';
 
-const App = () => (
-  <Button>Default</Button>
-);
+const styleSheet = createStyleSheet('ButtonAppBar', {
+  root: {
+    width: '100%',
+  },
+  flex: {
+    flex: 1,
+  },
+});
 
-/*class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+function ButtonAppBar(props) {
+  const classes = props.classes;
+  const stringVars = {
+    title: 'AMXX & ReHLDS API Documentation',
   }
-}*/
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton color="contrast" aria-label="Menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography type="title" color="inherit" className={classes.flex}>
+            {stringVars.title}
+          </Typography>
+          <Button color="contrast">Login</Button>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+}
 
-export default App;
+ButtonAppBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styleSheet)(ButtonAppBar);
